@@ -24,7 +24,13 @@ import getLibrary from './utils/getLibrary'
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
-if (!!window.ethereum) {
+// @ts-ignore
+if (!!window.starcoin) {
+  // @ts-ignore
+  window.ethereum = window.starcoin
+  // @ts-ignore
+  window.ethereum.isMetaMask = window.starcoin.isStarMask
+  // @ts-ignore
   window.ethereum.autoRefreshOnNetworkChange = false
 }
 
