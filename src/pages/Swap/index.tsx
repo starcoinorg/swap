@@ -7,6 +7,7 @@ import { SwapNetworkAlert } from 'components/swap/SwapNetworkAlert'
 import UnsupportedCurrencyFooter from 'components/swap/UnsupportedCurrencyFooter'
 import { MouseoverTooltip, MouseoverTooltipContent } from 'components/Tooltip'
 import { useGetAmountIn, useGetAmountOut, useGetReserves } from 'hooks/useTokenSwapRouter'
+import { useSwapExactTokenForToken } from 'hooks/useTokenSwapScript'
 import JSBI from 'jsbi'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown, ArrowLeft, CheckCircle, HelpCircle, Info } from 'react-feather'
@@ -259,17 +260,27 @@ export default function Swap({ history }: RouteComponentProps) {
   const showMaxButton = Boolean(maxInputAmount?.greaterThan(0) && !parsedAmounts[Field.INPUT]?.equalTo(maxInputAmount))
 
   // the callback to execute the swap
-  const { callback: swapCallback, error: swapCallbackError } = useSwapCallback(
-    trade,
-    allowedSlippage,
-    recipient,
-    signatureData
+  // const { callback: swapCallback, error: swapCallbackError } = useSwapCallback(
+  //   trade,
+  //   allowedSlippage,
+  //   recipient,
+  //   signatureData
+  // )
+  const swapCallback = useSwapExactTokenForToken(
+    account ?? undefined,
+    currencies[Field.INPUT]?.wrapped.address,
+    currencies[Field.OUTPUT]?.wrapped.address,
+    parsedAmounts[Field.INPUT]
+      ? parsedAmounts[Field.INPUT]!.multiply(parsedAmounts[Field.INPUT]!.decimalScale).toExact()
+      : undefined,
+    parsedAmounts[Field.OUTPUT]
+      ? parsedAmounts[Field.OUTPUT]!.multiply(parsedAmounts[Field.OUTPUT]!.decimalScale).toExact()
+      : undefined
   )
 
   const [singleHopOnly] = useUserSingleHopOnly()
 
   const handleSwap = useCallback(() => {
-    // TODO: handleSwap
     if (!swapCallback) {
       return
     }
@@ -279,7 +290,13 @@ export default function Swap({ history }: RouteComponentProps) {
     setSwapState({ attemptingTxn: true, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: undefined })
     swapCallback()
       .then((hash) => {
-        setSwapState({ attemptingTxn: false, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: hash })
+        setSwapState({
+          attemptingTxn: false,
+          tradeToConfirm,
+          showConfirm,
+          swapErrorMessage: undefined,
+          txHash: hash,
+        })
 
         ReactGA.event({
           category: 'Swap',

@@ -1,3 +1,4 @@
+import { encoding } from '@starcoin/starcoin'
 import { useCallback } from 'react'
 import useSWR from 'swr'
 import useStarcoinProvider from './useStarcoinProvider'
@@ -82,33 +83,5 @@ export function useGetAmountIn(amount_out?: number | string, reverse_in?: number
         type_args: [],
         args: [`${amount_out!.toString()}u128`, `${reverse_in!.toString()}u128`, `${reverse_out!.toString()}u128`],
       })) as [number]
-  )
-}
-
-/**
- * 通过指定换入的代币额度来换出代币
- */
-export function useSwapExactTokenForToken(
-  signer?: string,
-  x?: string,
-  y?: string,
-  amount_x_in?: number | string,
-  amount_y_out_min?: number | string
-) {
-  const { chainId } = useActiveWeb3React()
-  const provider = useStarcoinProvider()
-  console.log(x, y, amount_x_in, amount_y_out_min)
-  return useCallback(
-    async () =>
-      x && y && amount_x_in && amount_y_out_min && chainId
-        ? provider.getSigner(signer).sendUncheckedTransaction({
-            script: {
-              code: `${PREFIX}swap_exact_token_for_token`,
-              type_args: [x, y],
-              args: [`${amount_x_in.toString()}u128`, `${amount_y_out_min.toString()}u128`],
-            },
-          })
-        : undefined,
-    [amount_x_in, amount_y_out_min, chainId, provider, signer, x, y]
   )
 }
