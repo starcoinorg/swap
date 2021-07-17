@@ -33,7 +33,7 @@ export function useSwapExactTokenForToken(
     if (!x || !y || !amount_x_in || !amount_y_out_min) {
       return undefined
     }
-    const functionId = `${PREFIX}::swap_exact_token_for_token`
+    const functionId = `${PREFIX}swap_exact_token_for_token`
     const tyArgs = utils.tx.encodeStructTypeTags([x, y])
     const args = [arrayify(serializeU128(amount_x_in)), arrayify(serializeU128(amount_y_out_min))]
     const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
