@@ -3495,10 +3495,10 @@
     read-bigint "^0.1.6"
     ws "7.2.3"
 
-"@starcoin/starswap-sdk-core@0.1.0-alpha.1":
-  version "0.1.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@starcoin/starswap-sdk-core/-/starswap-sdk-core-0.1.0-alpha.1.tgz#101ab69518635f4a86ff512dacf2da764ef8f5b6"
-  integrity sha512-A7FgAC7/RBNh0dJGF4gCV9jLXyxNM00V1ewWy9I3nsPwIEUnahYSsChCIUfH2LLaOqvNgrptWwWv0+XFZIJajw==
+"@starcoin/starswap-sdk-core@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@starcoin/starswap-sdk-core/-/starswap-sdk-core-0.1.0.tgz#efecf72248a70faa00a9c140f5a7f6182895ef4a"
+  integrity sha512-iHSWOJDxN5A6FXNHoIQSW8P1VRRAOBotxJphKSHAlN754amPjGgzwPX29h/9yLiLdeRVK1AxFzWXxghlo6l9lA==
   dependencies:
     "@starcoin/stc-util" "^0.3.0"
     big.js "^5.2.2"
