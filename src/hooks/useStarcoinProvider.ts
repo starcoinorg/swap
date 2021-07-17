@@ -8,7 +8,8 @@ export default function useStarcoinProvider(): providers.Web3Provider | provider
   const { chainId } = useActiveWeb3React()
   return useMemo(() => {
     try {
-      return new providers.Web3Provider(window.starcoin!)
+      // We must specify the network as 'any' for starcoin to allow network changes
+      return new providers.Web3Provider(window.starcoin!, 'any')
     } catch {
       return new providers.JsonRpcProvider(NETWORK_URLS[chainId as SupportedChainId])
     }
