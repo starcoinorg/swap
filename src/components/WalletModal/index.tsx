@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import ReactGA from 'react-ga'
 import styled from 'styled-components/macro'
-import MetamaskIcon from '../../assets/images/metamask.png'
+import StarmaskIcon from '../../assets/images/starmask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { fortmatic, injected, portis } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
@@ -241,17 +241,17 @@ export default function WalletModal({
                 id={`connect-${key}`}
                 key={key}
                 color={'#E8831D'}
-                header={<Trans>Install Metamask</Trans>}
+                header={<Trans>Install StarMask</Trans>}
                 subheader={null}
-                link={'https://metamask.io/'}
-                icon={MetamaskIcon}
+                link={'https://github.com/starcoinorg/starmask-extension'}
+                icon={StarmaskIcon}
               />
             )
           } else {
             return null //dont want to return install twice
           }
         }
-        // don't return metamask if injected provider isn't metamask
+        // don't return starmask if injected provider isn't starmask
         else if (option.name === 'StarMask' && !isStarMask) {
           return null
         }
