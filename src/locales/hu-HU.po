@@ -178,8 +178,8 @@ msgid "Add liquidity."
 msgstr "Adja hozzá a likviditást."
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr "{0} hozzáadása a Metamask <0/> elemhez"
+msgid "Add {0} to Starmask <0/>"
+msgstr "{0} hozzáadása a Starmask <0/> elemhez"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/AddLiquidityV2/index.tsx
@@ -824,8 +824,8 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "Az input becsült. Legfeljebb <0>{0} {1}</0> értékesíthet, különben a tranzakció visszafordul."
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
-msgstr "Metamask telepítése"
+msgid "Install Starmask"
+msgstr "Starmask telepítése"
 
 #: src/pages/Swap/index.tsx
 msgid "Insufficient liquidity for this trade."

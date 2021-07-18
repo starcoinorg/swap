@@ -178,8 +178,8 @@ msgid "Add liquidity."
 msgstr "유동성 추가"
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr "{0}을(를) Metamask에 추가<0/>"
+msgid "Add {0} to Starmask <0/>"
+msgstr "{0}을(를) Starmask에 추가<0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/AddLiquidityV2/index.tsx
@@ -823,7 +823,7 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "입력이 추정됩니다. 최대 <0>{0} {1}</0>을(를) 팔거나 그렇지 않으면 거래가 취소됩니다."
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
+msgid "Install Starmask"
 msgstr "메타 마스크 설치"
 
 #: src/pages/Swap/index.tsx

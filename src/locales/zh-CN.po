@@ -183,8 +183,8 @@ msgid "Add liquidity."
 msgstr "添加流动性。"
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr "将 {0} 添加到 Metamask <0/>"
+msgid "Add {0} to Starmask <0/>"
+msgstr "将 {0} 添加到 Starmask <0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/AddLiquidityV2/index.tsx
@@ -832,8 +832,8 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "输入数额仅为估值。您最多会售出<0>{0} {1}</0> 否则将还原交易。"
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
-msgstr "安装Metamask"
+msgid "Install Starmask"
+msgstr "安装Starmask"
 
 #: src/pages/Swap/index.tsx
 msgid "Insufficient liquidity for this trade."

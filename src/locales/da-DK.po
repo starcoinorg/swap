@@ -178,8 +178,8 @@ msgid "Add liquidity."
 msgstr "Tilføj likviditet."
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr "Tilføj {0} til Metamask <0/>"
+msgid "Add {0} to Starmask <0/>"
+msgstr "Tilføj {0} til Starmask <0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/AddLiquidityV2/index.tsx
@@ -823,8 +823,8 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "Input er estimeret. Du vil sælge ved højst <0>{0} {1}</0> ellers vil transaktionen vende tilbage."
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
-msgstr "Installer Metamask"
+msgid "Install Starmask"
+msgstr "Installer Starmask"
 
 #: src/pages/Swap/index.tsx
 msgid "Insufficient liquidity for this trade."

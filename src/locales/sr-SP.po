@@ -178,7 +178,7 @@ msgid "Add liquidity."
 msgstr "Додајте ликвидност."
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
+msgid "Add {0} to Starmask <0/>"
 msgstr "Додајте {0} у Метамаск <0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
@@ -823,7 +823,7 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "Улаз се процењује. Продаћете највише <0>{0} {1}</0> или ће се трансакција вратити."
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
+msgid "Install Starmask"
 msgstr "Инсталирајте Метамаск"
 
 #: src/pages/Swap/index.tsx

@@ -178,8 +178,8 @@ msgid "Add liquidity."
 msgstr "Προσθήκη ρευστότητας."
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
-msgstr "Προσθήκη {0} στο Metamask <0/>"
+msgid "Add {0} to Starmask <0/>"
+msgstr "Προσθήκη {0} στο Starmask <0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
 #: src/pages/AddLiquidityV2/index.tsx
@@ -823,8 +823,8 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "Η τιμή που εισάγετε εκτιμήθηκε. Θα πουλήσετε το πολύ <0>{0} {1}</0> ή η συναλλαγή θα υπαναχωρήσει."
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
-msgstr "Εγκατάσταση Metamask"
+msgid "Install Starmask"
+msgstr "Εγκατάσταση Starmask"
 
 #: src/pages/Swap/index.tsx
 msgid "Insufficient liquidity for this trade."

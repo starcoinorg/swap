@@ -178,7 +178,7 @@ msgid "Add liquidity."
 msgstr "Legg til likviditet."
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
+msgid "Add {0} to Starmask <0/>"
 msgstr "Legg til {0} til metamaske <0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
@@ -823,7 +823,7 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "Inndata estimert. Du vil selge maksimalt <0>{0} {1}</0> eller transaksjonen vil tilbakestilles."
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
+msgid "Install Starmask"
 msgstr "Installer metamaske"
 
 #: src/pages/Swap/index.tsx

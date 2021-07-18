@@ -178,7 +178,7 @@ msgid "Add liquidity."
 msgstr "流動性を追加"
 
 #: src/components/TransactionConfirmationModal/index.tsx
-msgid "Add {0} to Metamask <0/>"
+msgid "Add {0} to Starmask <0/>"
 msgstr "{0} をメタマスクに追加 <0/>"
 
 #: src/pages/AddLiquidityV2/index.tsx
@@ -823,7 +823,7 @@ msgid "Input is estimated. You will sell at most <0>{0} {1}</0> or the transacti
 msgstr "上記は概算です。最大で<0>{0} {1}</0>を売れなければ、取引は差し戻されます。"
 
 #: src/components/WalletModal/index.tsx
-msgid "Install Metamask"
+msgid "Install Starmask"
 msgstr "メタマスクのインストール"
 
 #: src/pages/Swap/index.tsx
