@@ -1707,8 +1707,8 @@ msgid "View list"
 msgstr "查看代币列表"
 
 #: src/pages/CreateProposal/ProposalSubmissionModal.tsx
-msgid "View on Etherscan"
-msgstr "在 Etherscan 上查看"
+msgid "View on Stcscan"
+msgstr "在 Stcscan 上查看"
 
 #: src/components/AccountDetails/index.tsx
 #: src/components/AccountDetails/index.tsx

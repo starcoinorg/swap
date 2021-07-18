@@ -1694,8 +1694,8 @@ msgid "View list"
 msgstr "リストを表示"
 
 #: src/pages/CreateProposal/ProposalSubmissionModal.tsx
-msgid "View on Etherscan"
-msgstr "Etherscanで表示"
+msgid "View on Stcscan"
+msgstr "Stcscanで表示"
 
 #: src/components/AccountDetails/index.tsx
 #: src/components/AccountDetails/index.tsx

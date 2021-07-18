@@ -1695,8 +1695,8 @@ msgid "View list"
 msgstr "Lista megtekintése"
 
 #: src/pages/CreateProposal/ProposalSubmissionModal.tsx
-msgid "View on Etherscan"
-msgstr "Nézd meg az Etherscan webhelyen"
+msgid "View on Stcscan"
+msgstr "Nézd meg az Stcscan webhelyen"
 
 #: src/components/AccountDetails/index.tsx
 #: src/components/AccountDetails/index.tsx
