@@ -171,7 +171,7 @@ export default function FullPositionCard({
   pair,
   border,
   stakedBalance,
-}: Omit<PositionCardProps, 'pair'> & { pair: Pick<Pair, 'token0' | 'token1' | 'liquidityToken'> }) {
+}: Omit<PositionCardProps, 'pair'> & { pair: Pick<Pair, 'token0' | 'token1'> }) {
   const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
@@ -179,8 +179,16 @@ export default function FullPositionCard({
 
   const [showMore, setShowMore] = useState(false)
 
-  const userDefaultPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
-  const totalPoolTokens = useTotalSupply(pair.liquidityToken)
+  // const userDefaultPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
+  // const totalPoolTokens = useTotalSupply(pair.liquidityToken)
+  const { data: reserves } = useGetReserves(pair.token0.address, pair.token1.address)
+  const { data: liquidity } = useLiquidity(
+    account ?? undefined,
+    pair.token0.wrapped.address,
+    pair.token1.wrapped.address
+  )
+  const userDefaultPoolBalance = liquidity ? CurrencyAmount.fromRawAmount(pair.token1, liquidity[0]) : undefined
+  const totalPoolTokens = reserves ? CurrencyAmount.fromRawAmount(pair.token0, reserves[0]) : undefined
 
   // if staked balance balance provided, add to standard liquidity amount
   const userPoolBalance = stakedBalance ? userDefaultPoolBalance?.add(stakedBalance) : userDefaultPoolBalance
@@ -192,15 +200,9 @@ export default function FullPositionCard({
       ? new Percent(userPoolBalance.quotient, totalPoolTokens.quotient)
       : undefined
 
-  const { data: liquidity } = useLiquidity(
-    account ?? undefined,
-    pair.token0.wrapped.address,
-    pair.token1.wrapped.address
-  )
-  const { data: reserves } = useGetReserves(pair.token0.address, pair.token1.address)
   const { data: quote } = useQuote(liquidity?.[0], ...(reserves || []))
   const token0Deposited = quote ? CurrencyAmount.fromRawAmount(pair.token0, quote[0]) : undefined
-  const token1Deposited = liquidity ? CurrencyAmount.fromRawAmount(pair.token1, liquidity[0]) : undefined
+  const token1Deposited = userDefaultPoolBalance
   console.log(liquidity, quote)
   // const [token0Deposited, token1Deposited] =
   //   !!pair &&

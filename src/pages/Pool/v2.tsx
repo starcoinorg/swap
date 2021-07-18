@@ -136,7 +136,6 @@ export default function Pool() {
             {
               token0: ExtendedStar.onChain(chainId).wrapped,
               token1: BOT,
-              liquidityToken: ExtendedStar.onChain(chainId).wrapped,
             },
           ]
         : [],
@@ -234,7 +233,8 @@ export default function Pool() {
                   </RowBetween>
                 </ButtonSecondary> */}
                 {v2PairsWithoutStakedAmount.map((v2Pair) => (
-                  <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
+                  // <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
+                  <FullPositionCard key={v2Pair.token1.address} pair={v2Pair} />
                 ))}
                 {/* {stakingPairs.map(
                   (stakingPair, i) =>
