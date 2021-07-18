@@ -28,6 +28,7 @@ import DoubleCurrencyLogo from '../DoubleLogo'
 import { RowBetween, RowFixed, AutoRow } from '../Row'
 import { Dots } from '../swap/styleds'
 import { BIG_INT_ZERO } from '../../constants/misc'
+import { useGetReserves, useLiquidity, useQuote } from 'hooks/useTokenSwapRouter'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
@@ -166,7 +167,11 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   )
 }
 
-export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
+export default function FullPositionCard({
+  pair,
+  border,
+  stakedBalance,
+}: Omit<PositionCardProps, 'pair'> & { pair: Pick<Pair, 'token0' | 'token1' | 'liquidityToken'> }) {
   const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
@@ -187,17 +192,27 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
       ? new Percent(userPoolBalance.quotient, totalPoolTokens.quotient)
       : undefined
 
-  const [token0Deposited, token1Deposited] =
-    !!pair &&
-    !!totalPoolTokens &&
-    !!userPoolBalance &&
-    // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
-    JSBI.greaterThanOrEqual(totalPoolTokens.quotient, userPoolBalance.quotient)
-      ? [
-          pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
-          pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false),
-        ]
-      : [undefined, undefined]
+  const { data: liquidity } = useLiquidity(
+    account ?? undefined,
+    pair.token0.wrapped.address,
+    pair.token1.wrapped.address
+  )
+  const { data: reserves } = useGetReserves(pair.token0.address, pair.token1.address)
+  const { data: quote } = useQuote(liquidity?.[0], ...(reserves || []))
+  const token0Deposited = quote ? CurrencyAmount.fromRawAmount(pair.token0, quote[0]) : undefined
+  const token1Deposited = liquidity ? CurrencyAmount.fromRawAmount(pair.token1, liquidity[0]) : undefined
+  console.log(liquidity, quote)
+  // const [token0Deposited, token1Deposited] =
+  //   !!pair &&
+  //   !!totalPoolTokens &&
+  //   !!userPoolBalance &&
+  //   // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
+  //   JSBI.greaterThanOrEqual(totalPoolTokens.quotient, userPoolBalance.quotient)
+  //     ? [
+  //         pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
+  //         pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false),
+  //       ]
+  //     : [undefined, undefined]
 
   const backgroundColor = useColor(pair?.token0)
 
@@ -306,7 +321,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
               </Text>
             </FixedHeightRow>
 
-            <ButtonSecondary padding="8px" borderRadius="8px">
+            {/* <ButtonSecondary padding="8px" borderRadius="8px">
               <ExternalLink
                 style={{ width: '100%', textAlign: 'center' }}
                 href={`https://v2.info.uniswap.org/account/${account}`}
@@ -315,10 +330,10 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                   View accrued fees and analytics<span style={{ fontSize: '11px' }}>↗</span>
                 </Trans>
               </ExternalLink>
-            </ButtonSecondary>
+            </ButtonSecondary> */}
             {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.quotient, BIG_INT_ZERO) && (
               <RowBetween marginTop="10px">
-                <ButtonPrimary
+                {/* <ButtonPrimary
                   padding="8px"
                   borderRadius="8px"
                   as={Link}
@@ -326,13 +341,14 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                   width="32%"
                 >
                   <Trans>Migrate</Trans>
-                </ButtonPrimary>
+                </ButtonPrimary> */}
                 <ButtonPrimary
                   padding="8px"
                   borderRadius="8px"
                   as={Link}
                   to={`/add/v2/${currencyId(currency0)}/${currencyId(currency1)}`}
-                  width="32%"
+                  // width="32%"
+                  width="49%"
                 >
                   <Trans>Add</Trans>
                 </ButtonPrimary>
@@ -340,7 +356,8 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
                   padding="8px"
                   borderRadius="8px"
                   as={Link}
-                  width="32%"
+                  // width="32%"
+                  width="49%"
                   to={`/remove/v2/${currencyId(currency0)}/${currencyId(currency1)}`}
                 >
                   <Trans>Remove</Trans>

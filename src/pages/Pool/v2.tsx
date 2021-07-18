@@ -24,6 +24,7 @@ import { useStakingInfo, StakingInfo } from '../../state/stake/hooks'
 import { BIG_INT_ZERO } from '../../constants/misc'
 import { Pair } from '@uniswap/v2-sdk'
 import { Trans } from '@lingui/macro'
+import { BOT, ExtendedStar } from 'constants/tokens'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -80,7 +81,7 @@ const EmptyProposals = styled.div`
 
 export default function Pool() {
   const theme = useContext(ThemeContext)
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -121,13 +122,26 @@ export default function Pool() {
   const stakingPairs = useV2Pairs(stakingInfosWithBalance?.map((stakingInfo) => stakingInfo.tokens))
 
   // remove any pairs that also are included in pairs with stake in mining pool
-  const v2PairsWithoutStakedAmount = allV2PairsWithLiquidity.filter((v2Pair) => {
-    return (
-      stakingPairs
-        ?.map((stakingPair) => stakingPair[1])
-        .filter((stakingPair) => stakingPair?.liquidityToken.address === v2Pair.liquidityToken.address).length === 0
-    )
-  })
+  // const v2PairsWithoutStakedAmount = allV2PairsWithLiquidity.filter((v2Pair) => {
+  //   return (
+  //     stakingPairs
+  //       ?.map((stakingPair) => stakingPair[1])
+  //       .filter((stakingPair) => stakingPair?.liquidityToken.address === v2Pair.liquidityToken.address).length === 0
+  //   )
+  // })
+  const v2PairsWithoutStakedAmount = useMemo(
+    () =>
+      chainId
+        ? [
+            {
+              token0: ExtendedStar.onChain(chainId).wrapped,
+              token1: BOT,
+              liquidityToken: ExtendedStar.onChain(chainId).wrapped,
+            },
+          ]
+        : [],
+    [chainId]
+  )
 
   return (
     <>
@@ -222,7 +236,7 @@ export default function Pool() {
                 {v2PairsWithoutStakedAmount.map((v2Pair) => (
                   <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
                 ))}
-                {stakingPairs.map(
+                {/* {stakingPairs.map(
                   (stakingPair, i) =>
                     stakingPair[1] && ( // skip pairs that arent loaded
                       <FullPositionCard
@@ -232,7 +246,7 @@ export default function Pool() {
                       />
                     )
                 )}
-                {/* <RowFixed justify="center" style={{ width: '100%' }}>
+                <RowFixed justify="center" style={{ width: '100%' }}>
                   <ButtonOutlined
                     as={Link}
                     to="/migrate/v2"
