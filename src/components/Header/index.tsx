@@ -318,6 +318,11 @@ export default function Header() {
         </Title>
       </HeaderRow>
       <HeaderLinks>
+        {process.env.NODE_ENV === 'development' ? (
+          <StyledNavLink id={`register-nav-link`} to={'/register'}>
+            <Trans>Register</Trans>
+          </StyledNavLink>
+        ) : null}
         <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
           <Trans>Swap</Trans>
         </StyledNavLink>
