@@ -45,7 +45,7 @@ export interface UserState {
   userSlippageTolerance: number | 'auto'
   userSlippageToleranceHasBeenMigratedToAuto: boolean // temporary flag for migration status
 
-  // deadline set by user in minutes, used in all txns
+  // deadline set by user in seconds, used in all txns
   userDeadline: number
 
   tokens: {
