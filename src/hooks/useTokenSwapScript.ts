@@ -3,6 +3,7 @@ import { arrayify, hexlify } from '@ethersproject/bytes'
 import { useCallback } from 'react'
 import useStarcoinProvider from './useStarcoinProvider'
 import { TransactionPayloadVariantScriptFunction } from '@starcoin/starcoin/dist/src/lib/runtime/starcoin_types'
+import { useTransactionExpirationSecs } from './useTransactionDeadline'
 
 const PREFIX = '0xbd7e8be8fae9f60f2f5136433e36a091::TokenSwapScripts::'
 
@@ -40,6 +41,7 @@ export function useRegisterSwapPair(signer?: string) {
  */
 export function useSwapExactTokenForToken(signer?: string) {
   const provider = useStarcoinProvider()
+  const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, amount_x_in: number | string, amount_y_out_min: number | string) => {
       const functionId = `${PREFIX}swap_exact_token_for_token`
@@ -48,10 +50,11 @@ export function useSwapExactTokenForToken(signer?: string) {
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
         data: serializeScriptFunction(scriptFunction),
+        expiredSecs,
       })
       return transactionHash
     },
-    [provider, signer]
+    [provider, signer, expiredSecs]
   )
 }
 
@@ -60,6 +63,7 @@ export function useSwapExactTokenForToken(signer?: string) {
  */
 export function useSwapTokenForExactToken(signer?: string) {
   const provider = useStarcoinProvider()
+  const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (x: string, y: string, amount_x_in_max: number | string, amount_y_out: number | string) => {
       const functionId = `${PREFIX}swap_token_for_exact_token`
@@ -68,10 +72,11 @@ export function useSwapTokenForExactToken(signer?: string) {
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
         data: serializeScriptFunction(scriptFunction),
+        expiredSecs,
       })
       return transactionHash
     },
-    [provider, signer]
+    [provider, signer, expiredSecs]
   )
 }
 
@@ -80,6 +85,7 @@ export function useSwapTokenForExactToken(signer?: string) {
  */
 export function useAddLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
+  const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (
       x: string,
@@ -100,10 +106,11 @@ export function useAddLiquidity(signer?: string) {
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
         data: serializeScriptFunction(scriptFunction),
+        expiredSecs,
       })
       return transactionHash
     },
-    [provider, signer]
+    [provider, signer, expiredSecs]
   )
 }
 
@@ -112,6 +119,7 @@ export function useAddLiquidity(signer?: string) {
  */
 export function useRemoveLiquidity(signer?: string) {
   const provider = useStarcoinProvider()
+  const expiredSecs = useTransactionExpirationSecs()
   return useCallback(
     async (
       x: string,
@@ -130,9 +138,10 @@ export function useRemoveLiquidity(signer?: string) {
       const scriptFunction = utils.tx.encodeScriptFunction(functionId, tyArgs, args)
       const transactionHash = await provider.getSigner(signer).sendUncheckedTransaction({
         data: serializeScriptFunction(scriptFunction),
+        expiredSecs,
       })
       return transactionHash
     },
-    [provider, signer]
+    [provider, signer, expiredSecs]
   )
 }
